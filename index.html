@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 120px;
+    text-align: center;
+    padding: 1rem;
+    background-color: lightgray;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+nav{
+    padding-top: 25px;
+}
+nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: blue;
+    font-size: 22px;
+
+}
+
+nav a:hover{
+    background-color: #333;
+    color: aliceblue;
+    padding: 15px;
+    border-radius: 10px;
+}
+section {
+    padding: 2rem;
+}
+
+.sub_title{
+    color: darkmagenta;
+    background-color: pink;
+    margin-bottom: 25px;
+    
+}
+.main_title{
+    font-size: 25px;
+    line-height: 30px;
+    font-style: italic;
+}
+
+.section_main{
+    background-color: darkcyan;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-bottom: 100px;
+
+
+}
+
+.btn{
+    background-color: gray;
+    color: white;
+    font-size: 25px;
+}
+
+.btn:hover{
+    background-color:whitesmoke;
+    color: black;
+}
+
+#estimator, #contact {
+    margin-top: 2rem;
+}
+
+form label, form input, form select, form button, form textarea {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 10px;
+}
+
+#costOutput {
+    font-weight: bold;
+    color: white;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+section {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 70px 0;
+    font-size: 20px;
+    height: 200px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: yellow;
+    text-decoration: none;
+    margin: 0 10px;
+    padding-top: 30px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+    </style>
+    <!--------------------- CSS LINK ---------------------->
+    <!-- <link rel="stylesheet" href="./assets/CSS/style.css"> -->
+    <title>Landscaping Company</title>
+</head>
+<body>
+    <header>
+        <h1 style="color: darkgoldenrod;">Landscaping Company</h1>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#estimator">Cost Estimator</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <section id="services">
+        <h2 class="sub_title">Our Services</h2>
+        <p class="main_title">We offer expert landscaping services designed to transform any outdoor space into a beautiful, inviting environment. From lush garden installations to functional patio designs, our team combines creativity with precision. Whether you seek a simple refresh or a complete redesign, we craft landscapes that enhance your property’s appeal and value.</p>
+    </section>
+
+    <section id="estimator" class="section_main">
+        <h2 class="sub_title">Project Cost Estimator</h2>
+        <form id="costEstimatorForm">
+            <label for="yardSize">Yard Size (sq ft):</label>
+            <input type="number" id="yardSize" name="yardSize" required>
+
+            <label for="designOption">Design Option:</label>
+            <select id="designOption" name="designOption">
+                <option value="basic">Basic</option>
+                <option value="premium">Premium</option>
+                <option value="luxury">Luxury</option>
+            </select>
+
+            <button type="button" class="btn" onclick="calculateCost()">Calculate Result</button>
+        </form>
+        <p id="costOutput"></p>
+    </section>
+
+    <section id="contact" class="section_main">
+        <h2 class="sub_title">Contact Us</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="button" class="btn" onclick="sendEmail()">Send Message</button>
+        </form>
+    </section>
+
+    <!---------------- Footer Section ---------------------->
+    <footer>
+        <p>@ 2024 Landscaping Company. All rights reserved.</p>
+        <p>
+            <a href="#services">Services</a> |
+            <a href="#estimator">Cost Estimator</a> |
+            <a href="#contact">Contact Us</a>
+        </p>
+    </footer>
+
+    <!---------------- Javascript Link -------------------->
+    <!-- <script src="./assets/Javascript/script.js"></script> -->
+     <script>
+        /******************* Cost Estimator ********************/
+function calculateCost() {
+    const yardSize = document.getElementById('yardSize').value;
+    const designOption = document.getElementById('designOption').value;
+    let cost = 0;
+
+    if (designOption === 'basic') cost = yardSize * 5;
+    else if (designOption === 'premium') cost = yardSize * 10;
+    else if (designOption === 'luxury') cost = yardSize * 20;
+
+    document.getElementById('costOutput').textContent = `Estimated Cost: $${cost}`;
+}
+
+/**************** Contact Form Submission ***************/
+function sendEmail() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    
+    alert('Email functionality requires integration with a service.');
+}
+/**************** Animations on Scroll ***************/
+
+window.addEventListener('scroll', () => {
+    document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const triggerPoint = window.innerHeight / 1.3;
+        if (sectionTop < triggerPoint) {
+            section.style.opacity = 1;
+        }
+    });
+});
+
+     </script>
+</body>
+</html>
